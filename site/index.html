@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A beginner-friendly reference for Terraform modules, AWS infrastructure patterns, workflow commands, and safe cloud habits."
+    >
+    <title>Terraform AWS Module Catalog</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Terraform AWS Module Catalog home">
+        <span class="brand-mark">tf</span>
+        <span>Terraform AWS Module Catalog</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#modules">Modules</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#safety">Safety</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Beginner Terraform reference</p>
+          <h1>Learn Terraform through practical AWS patterns.</h1>
+          <p class="hero-text">
+            A static reference for understanding Terraform modules, common AWS
+            building blocks, deployment workflows, cost controls, and safe
+            infrastructure habits.
+          </p>
+          <div class="hero-actions" aria-label="Page shortcuts">
+            <a class="button primary" href="#modules">Explore modules</a>
+            <a class="button secondary" href="#workflow">View workflow</a>
+          </div>
+        </div>
+
+        <aside class="terminal-card" aria-label="Terraform command preview">
+          <div class="terminal-top">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <pre><code>$ terraform init
+$ terraform fmt -recursive
+$ terraform validate
+$ terraform plan
+$ terraform apply</code></pre>
+        </aside>
+      </section>
+
+      <section class="section" id="modules">
+        <div class="section-heading">
+          <p class="eyebrow">Module catalog</p>
+          <h2>Planned AWS modules</h2>
+          <p>
+            Each module explains what the infrastructure does, which AWS services
+            are involved, and what a beginner should understand before applying it.
+          </p>
+        </div>
+
+        <div class="module-grid">
+          <article class="module-card complete">
+            <div class="card-top">
+              <h3>s3-static-site</h3>
+              <span class="status">Start here</span>
+            </div>
+            <p>Creates the storage layer for static website assets while introducing buckets, object storage, tags, and secure defaults.</p>
+            <ul>
+              <li>S3 bucket</li>
+              <li>Public access blocked</li>
+              <li>Website asset storage</li>
+            </ul>
+          </article>
+
+          <article class="module-card">
+            <div class="card-top">
+              <h3>cloudfront-cdn</h3>
+              <span class="status">Core</span>
+            </div>
+            <p>Places CloudFront in front of S3 and explains why private origins are safer than public website buckets.</p>
+            <ul>
+              <li>CloudFront distribution</li>
+              <li>Origin Access Control</li>
+              <li>Cache policies</li>
+            </ul>
+          </article>
+
+          <article class="module-card">
+            <div class="card-top">
+              <h3>route53-dns</h3>
+              <span class="status">DNS</span>
+            </div>
+            <p>Connects a custom domain to CloudFront and introduces hosted zones, alias records, and certificate validation.</p>
+            <ul>
+              <li>Hosted zone lookup</li>
+              <li>Alias records</li>
+              <li>Certificate validation</li>
+            </ul>
+          </article>
+
+          <article class="module-card">
+            <div class="card-top">
+              <h3>iam-github-deploy</h3>
+              <span class="status">IAM</span>
+            </div>
+            <p>Defines least-privilege permissions for automated deployments without giving broad access to the AWS account.</p>
+            <ul>
+              <li>S3 sync permissions</li>
+              <li>CloudFront invalidation</li>
+              <li>Scoped IAM policy</li>
+            </ul>
+          </article>
+
+          <article class="module-card">
+            <div class="card-top">
+              <h3>lambda-api</h3>
+              <span class="status">Serverless</span>
+            </div>
+            <p>Introduces a basic serverless API pattern using managed services and event-driven compute.</p>
+            <ul>
+              <li>API Gateway</li>
+              <li>Lambda</li>
+              <li>DynamoDB</li>
+            </ul>
+          </article>
+
+          <article class="module-card">
+            <div class="card-top">
+              <h3>eks-platform</h3>
+              <span class="status">Advanced</span>
+            </div>
+            <p>Shows where Terraform fits when provisioning Kubernetes infrastructure on AWS.</p>
+            <ul>
+              <li>EKS cluster</li>
+              <li>IRSA</li>
+              <li>GitOps deployment</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="split-section" id="architecture">
+        <div>
+          <p class="eyebrow">Reference architecture</p>
+          <h2>Static site delivery path</h2>
+          <p>
+            A common beginner-friendly AWS pattern is to store static files in S3
+            and serve them through CloudFront. The S3 bucket should stay private,
+            with CloudFront as the public entry point.
+          </p>
+        </div>
+        <div class="flow" aria-label="Static website architecture flow">
+          <span>GitHub Actions</span>
+          <span>S3 private bucket</span>
+          <span>CloudFront OAC</span>
+          <span>ACM certificate</span>
+          <span>Route 53 alias</span>
+        </div>
+      </section>
+
+      <section class="section compact" id="workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Terraform workflow</p>
+          <h2>Commands to understand, not memorize</h2>
+        </div>
+        <div class="workflow-list">
+          <button class="workflow-item active" data-command="terraform fmt -recursive">
+            Format Terraform files
+          </button>
+          <button class="workflow-item" data-command="terraform init">
+            Initialize providers and backend
+          </button>
+          <button class="workflow-item" data-command="terraform validate">
+            Validate configuration syntax
+          </button>
+          <button class="workflow-item" data-command="terraform plan">
+            Preview infrastructure changes
+          </button>
+          <button class="workflow-item" data-command="terraform apply">
+            Apply approved changes
+          </button>
+          <button class="workflow-item" data-command="terraform destroy">
+            Clean up test resources
+          </button>
+        </div>
+        <output class="command-output" id="commandOutput">terraform fmt -recursive</output>
+      </section>
+
+      <section class="split-section safety" id="safety">
+        <div>
+          <p class="eyebrow">Cost and safety</p>
+          <h2>Build like the bill is real.</h2>
+          <p>
+            Static hosting is low cost, but good habits start here: budgets,
+            tagging, private buckets, least-privilege IAM, and cleanup notes.
+          </p>
+        </div>
+        <ul class="checklist">
+          <li>Create an AWS Budget alert before deploying.</li>
+          <li>Keep the S3 bucket private and use CloudFront OAC.</li>
+          <li>Never commit access keys or Terraform state with secrets.</li>
+          <li>Document deploy and destroy steps in every project.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>A beginner-friendly Terraform reference for AWS infrastructure patterns.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
